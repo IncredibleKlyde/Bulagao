@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About Us - GOLD'S GYM ONLINE COURSE</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>GOLD'S GYM ONLINE COURSE</header>
+    <nav id="navbar">
+        <!-- Navbar links will be populated by JavaScript based on login state -->
+    </nav>
+    <div class="container">
+        <section id="about" class="about-section">
+            <h2>About Us</h2>
+            <h3>MISSION</h3>
+            <p>Our mission is to empower individuals to achieve their fitness goals by providing top-notch training programs, expert guidance, and a supportive community.</p>
+            <h3>VISION</h3>
+            <p>Our vision is to be the leading fitness institution that transforms lives through innovative and personalized fitness solutions, fostering a healthier and stronger community.</p>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; GOLD'S GYM. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Function to check if user is logged in
+        function isLoggedIn() {
+            return localStorage.getItem('loggedInUser') !== null;
+        }
+
+        // Function to get logged in user's name
+        function getLoggedInUser() {
+            return localStorage.getItem('loggedInUser');
+        }
+
+        // Function to build navbar links based on login state
+        function buildNavbar() {
+            const navbar = document.getElementById('navbar');
+            navbar.innerHTML = '';
+
+            if (isLoggedIn()) {
+                // Logged in navbar links
+                navbar.innerHTML += '<a href="home.html">HOME</a>';
+                navbar.innerHTML += '<a href="program.html">WORKOUT PROGRAM</a>';
+                navbar.innerHTML += '<a href="coaches.html">COACHES</a>';
+                navbar.innerHTML += '<a href="contact.html">CONTACT</a>';
+                navbar.innerHTML += '<a href="about.html">ABOUT US</a>';
+                navbar.innerHTML += '<a href="#" id="logout-link">LOGOUT (' + getLoggedInUser() + ')</a>';
+
+                // Add logout event listener
+                document.getElementById('logout-link').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('loggedInUser');
+                    window.location.href = 'home.html';
+                });
+            } else {
+                // Not logged in navbar links
+                navbar.innerHTML += '<a href="home.html">HOME</a>';
+                navbar.innerHTML += '<a href="contact.html">CONTACT</a>';
+                navbar.innerHTML += '<a href="about.html">ABOUT US</a>';
+                navbar.innerHTML += '<a href="login.html">LOGIN</a>';
+                navbar.innerHTML += '<a href="register.html">REGISTER</a>';
+            }
+        }
+
+        // Build navbar on page load
+        window.onload = buildNavbar;
+    </script>
+</body>
+</html>

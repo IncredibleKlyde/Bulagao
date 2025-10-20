@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOLD'S GYM ONLINE COURSE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>GOLD'S GYM ONLINE COURSE</h1>
+    </header>
+
+    <nav id="navbar">
+        {% if session.get('username') %}
+            <a href="{{ url_for('home') }}">HOME</a>
+            <a href="{{ url_for('program') }}">WORKOUT PROGRAM</a>
+            <a href="{{ url_for('coaches') }}">COACHES</a>
+            <a href="{{ url_for('contact') }}">CONTACT</a>
+            <a href="{{ url_for('about') }}">ABOUT US</a>
+            <a href="{{ url_for('logout') }}">LOGOUT ({{ session['username'] }})</a>
+        {% else %}
+            <a href="{{ url_for('home') }}">HOME</a>
+            <a href="{{ url_for('contact') }}">CONTACT</a>
+            <a href="{{ url_for('about') }}">ABOUT US</a>
+            <a href="{{ url_for('login') }}">LOGIN</a>
+            <a href="{{ url_for('register') }}">REGISTER</a>
+        {% endif %}
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; {{ current_year }} GOLD'S GYM. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

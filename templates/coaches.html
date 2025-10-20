@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="coaches" class="coaches-section">
+    <h2>Meet Our Coaches</h2>
+    <div class="coaches">
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/joseph.jpg') }}" alt="Coach Joseph" />
+            <h3>Joseph Anthony Arambala</h3>
+            <p>Specialty: Strength Training, Bodybuilding Specialist</p>
+            <a href="{{ url_for('inquire') }}?coach=Joseph%20Anthony%20Arambala" class="inquire-button">Inquire</a>
+        </div>
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/axcee.jpg') }}" alt="Coach Axcee" />
+            <h3>Axcee Cabusas</h3>
+            <p>Specialty: Body Recomposition, Calisthenics, Martial Arts</p>
+            <a href="{{ url_for('inquire') }}?coach=Axcee%20Cabusas" class="inquire-button">Inquire</a>
+        </div>
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/klyde.jpg') }}" alt="Coach Klyde" />
+            <h3>Jan Klyde Bulagao</h3>
+            <p>Specialty: Weight Loss, Nutrition, Strength Training</p>
+            <a href="{{ url_for('inquire') }}?coach=Jan%20Klyde%20Bulagao" class="inquire-button">Inquire</a>
+        </div>
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/jerkean.jpg') }}" alt="Coach Jerkean" />
+            <h3>Jerkean Gabrina</h3>
+            <p>Specialty: Nutrition, Strength and Conditioning</p>
+            <a href="{{ url_for('inquire') }}?coach=Jerkean%20Gabrina" class="inquire-button">Inquire</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

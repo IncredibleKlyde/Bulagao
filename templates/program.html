@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="program" class="program-section">
+    <h2>PPL Workout Program</h2>
+    <div class="programs">
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/flatbench.gif') }}" alt="Incline Bench Press" />
+            <h3>Chest</h3>
+            <p>Incline bench press, Flat bench press</p>
+        </div>
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/pullup.gif') }}" alt="Pull-ups" />
+            <h3>Back</h3>
+            <p>Pull-ups, Lat Pulldown, Seated Row</p>
+        </div>
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/squat.gif') }}" alt="Squats" />
+            <h3>Legs</h3>
+            <p>Squats, Leg Extensions</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

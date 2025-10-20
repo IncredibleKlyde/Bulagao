@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Coaches - GOLD'S GYM ONLINE COURSE</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>GOLD'S GYM ONLINE COURSE</header>
+    <nav id="navbar">
+        <!-- Navbar links will be populated by JavaScript based on login state -->
+    </nav>
+    <div class="container">
+        <section id="coaches" class="coaches-section">
+            <h2>Meet Our Coaches</h2>
+            <div class="coaches">
+                <div class="card">
+                    <img src="images/joseph.jpg" alt="Coach Joseph" />
+                    <h3>Joseph Anthony Arambala</h3>
+                    <p>Specialty: Strength Training, Bodybuilding Specialist</p>
+                    <a href="inquire.html?coach=Joseph%20Anthony%20Arambala" class="inquire-button">Inquire</a>
+                </div>
+                <div class="card">
+                    <img src="images/axcee.jpg" alt="Coach Axcee" />
+                    <h3>Axcee Cabusas</h3>
+                    <p>Specialty: Body Recomposition, Calisthenics, Martial Arts</p>
+                    <a href="inquire.html?coach=Axcee%20Cabusas" class="inquire-button">Inquire</a>
+                </div>
+                <div class="card">
+                    <img src="images/klyde.jpg" alt="Coach Klyde" />
+                    <h3>Jan Klyde Bulagao</h3>
+                    <p>Specialty: Weight Loss, Nutrition, Strength Training</p>
+                    <a href="inquire.html?coach=Jan%20Klyde%20Bulagao" class="inquire-button">Inquire</a>
+                </div>
+                <div class="card">
+                    <img src="images/jerkean.jpg" alt="Coach Jerkean" />
+                    <h3>Jerkean Gabrina</h3>
+                    <p>Specialty: Nutrition, Strength and Conditioning</p>
+                    <a href="inquire.html?coach=Jerkean%20Gabrina" class="inquire-button">Inquire</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; GOLD'S GYM. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Function to check if user is logged in
+        function isLoggedIn() {
+            return localStorage.getItem('loggedInUser') !== null;
+        }
+
+        // Function to get logged in user's name
+        function getLoggedInUser() {
+            return localStorage.getItem('loggedInUser');
+        }
+
+        // Function to build navbar links based on login state
+        function buildNavbar() {
+            const navbar = document.getElementById('navbar');
+            navbar.innerHTML = '';
+
+            if (isLoggedIn()) {
+                // Logged in navbar links
+                navbar.innerHTML += '<a href="home.html">HOME</a>';
+                navbar.innerHTML += '<a href="program.html">WORKOUT PROGRAM</a>';
+                navbar.innerHTML += '<a href="coaches.html">COACHES</a>';
+                navbar.innerHTML += '<a href="contact.html">CONTACT</a>';
+                navbar.innerHTML += '<a href="about.html">ABOUT US</a>';
+                navbar.innerHTML += '<a href="#" id="logout-link">LOGOUT (' + getLoggedInUser() + ')</a>';
+
+                // Add logout event listener
+                document.getElementById('logout-link').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('loggedInUser');
+                    window.location.href = 'home.html';
+                });
+            } else {
+                // Not logged in navbar links
+                navbar.innerHTML += '<a href="home.html">HOME</a>';
+                navbar.innerHTML += '<a href="contact.html">CONTACT</a>';
+                navbar.innerHTML += '<a href="about.html">ABOUT US</a>';
+                navbar.innerHTML += '<a href="login.html">LOGIN</a>';
+                navbar.innerHTML += '<a href="register.html">REGISTER</a>';
+            }
+        }
+
+        // Build navbar on page load
+        window.onload = buildNavbar;
+    </script>
+</body>
+</html>

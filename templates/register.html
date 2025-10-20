@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="register" class="register-section">
+    <h2>Register</h2>
+
+    <form method="POST" action="{{ url_for('register') }}">
+    <label for="full-name">Full Name:</label>
+    <input type="text" id="full-name" name="full-name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit">Register</button>
+    </form>
+
+
+    {% if message %}
+        <p style="text-align:center; color:{{ 'green' if success else 'red' }}">{{ message }}</p>
+    {% endif %}
+
+    <button class="login-button" onclick="location.href='{{ url_for('login') }}'">Back to Login</button>
+</section>
+{% endblock %}

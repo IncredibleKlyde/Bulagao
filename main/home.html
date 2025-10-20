@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home - GOLD'S GYM ONLINE COURSE</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>GOLD'S GYM ONLINE COURSE</header>
+    <nav id="navbar">
+        <!-- Navbar links will be populated by JavaScript based on login state -->
+    </nav>
+    <div class="container">
+        <section id="home" class="hero">
+            <h1>Welcome to GOLD'S GYM</h1>
+            <p>It's time to be the best version of yourself! Join our online course and transform your fitness journey.</p>
+           
+        </section>
+        <section id="introduction" class="introduction-section">
+            <h2>About GOLD'S GYM Online Course</h2>
+            <p>Our online course is designed to provide you with expert guidance, personalized workout programs, and nutritional advice to help you achieve your fitness goals from the comfort of your home.</p>
+            <p>Whether you're a beginner or an experienced athlete, our team of professional coaches is here to support you every step of the way.</p>
+            <p>With flexible schedules, interactive sessions, and a supportive community, GOLD'S GYM Online Course is your ultimate partner in fitness transformation.</p>
+            <p>Get started today and take the first step towards a healthier, stronger you!</p>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; GOLD'S GYM. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Function to check if user is logged in
+        function isLoggedIn() {
+            return localStorage.getItem('loggedInUser') !== null;
+        }
+
+        // Function to get logged in user's name
+        function getLoggedInUser() {
+            return localStorage.getItem('loggedInUser');
+        }
+
+        // Function to build navbar links based on login state
+        function buildNavbar() {
+            const navbar = document.getElementById('navbar');
+            navbar.innerHTML = '';
+
+            if (isLoggedIn()) {
+                // Logged in navbar links
+                navbar.innerHTML += '<a href="home.html">HOME</a>';
+                navbar.innerHTML += '<a href="program.html">WORKOUT PROGRAM</a>';
+                navbar.innerHTML += '<a href="coaches.html">COACHES</a>';
+                navbar.innerHTML += '<a href="contact.html">CONTACT</a>';
+                navbar.innerHTML += '<a href="about.html">ABOUT US</a>';
+                navbar.innerHTML += '<a href="#" id="logout-link">LOGOUT (' + getLoggedInUser() + ')</a>';
+
+                // Add logout event listener
+                document.getElementById('logout-link').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('loggedInUser');
+                    window.location.href = 'home.html';
+                });
+            } else {
+                // Not logged in navbar links
+                navbar.innerHTML += '<a href="home.html">HOME</a>';
+                navbar.innerHTML += '<a href="contact.html">CONTACT</a>';
+                navbar.innerHTML += '<a href="about.html">ABOUT US</a>';
+                navbar.innerHTML += '<a href="login.html">LOGIN</a>';
+                navbar.innerHTML += '<a href="register.html">REGISTER</a>';
+            }
+        }
+
+        // Build navbar on page load
+        window.onload = buildNavbar;
+    </script>
+</body>
+</html>

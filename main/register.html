@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Register - GOLD'S GYM ONLINE COURSE</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>GOLD'S GYM ONLINE COURSE</header>
+    <nav id="navbar">
+        <!-- Navbar links will be populated by JavaScript based on login state -->
+    </nav>
+    <div class="container">
+        <section id="register" class="register-section">
+            <h2>Register</h2>
+            <form id="register-form">
+                <label for="full-name">Full Name:</label>
+                <input type="text" id="full-name" name="full-name" placeholder="Enter your full name" required />
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required />
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required />
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required />
+                <button type="submit">Register</button>
+            </form>
+            <button class="login-button" onclick="location.href='login.html'">Back to Login</button>
+            <p id="register-error" style="color: red; text-align: center; display: none;"></p>
+            <p id="register-success" style="color: green; text-align: center; display: none;"></p>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; GOLD'S GYM. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Function to check if user is logged in
+        function isLoggedIn() {
+            return localStorage.getItem('loggedInUser') !== null;
+        }
+
+        // Function to get logged in user's name
+        function getLoggedInUser() {
+            return localStorage.getItem('loggedInUser');
+        }
+
+        // Function to build navbar links based on login state
+        function buildNavbar() {
+            const navbar = document.getElementById('navbar');
+            navbar.innerHTML = '';
+
+            if (isLoggedIn()) {
+                // Logged in navbar links
+                navbar.innerHTML += '<a href="home.html">HOME</a>';
+                navbar.innerHTML += '<a href="program.html">WORKOUT PROGRAM</a>';
+                navbar.innerHTML += '<a href="coaches.html">COACHES</a>';
+                navbar.innerHTML += '<a href="contact.html">CONTACT</a>';
+                navbar.innerHTML += '<a href="about.html">ABOUT US</a>';
+                navbar.innerHTML += '<a href="#" id="logout-link">LOGOUT (' + getLoggedInUser() + ')</a>';
+
+                // Add logout event listener
+                document.getElementById('logout-link').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('loggedInUser');
+                    window.location.href = 'home.html';
+                });
+            } else {
+                // Not logged in navbar links
+                navbar.innerHTML += '<a href="home.html">HOME</a>';
+                navbar.innerHTML += '<a href="contact.html">CONTACT</a>';
+                navbar.innerHTML += '<a href="about.html">ABOUT US</a>';
+                navbar.innerHTML += '<a href="login.html">LOGIN</a>';
+                navbar.innerHTML += '<a href="register.html">REGISTER</a>';
+            }
+        }
+
+        // Registration form submission handler
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fullName = document.getElementById('full-name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            const errorElem = document.getElementById('register-error');
+            const successElem = document.getElementById('register-success');
+            errorElem.style.display = 'none';
+            successElem.style.display = 'none';
+
+            if (password !== confirmPassword) {
+                errorElem.textContent = 'Passwords do not match.';
+                errorElem.style.display = 'block';
+                return;
+            }
+
+            // Retrieve registered users from localStorage
+            const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+
+            // Check if email already exists
+            if (users.some(u => u.email === email)) {
+                errorElem.textContent = 'Email is already registered.';
+                errorElem.style.display = 'block';
+                return;
+            }
+
+            // Add new user
+            users.push({ username: fullName, email: email, password: password });
+            localStorage.setItem('registeredUsers', JSON.stringify(users));
+
+            successElem.textContent = 'Registration successful! Redirecting to login...';
+            successElem.style.display = 'block';
+
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
+        });
+
+        // Build navbar on page load
+        window.onload = buildNavbar;
+    </script>
+</body>
+</html>

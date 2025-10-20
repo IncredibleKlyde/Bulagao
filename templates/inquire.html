@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="inquiry" class="inquiry-section">
+        <h2>Inquire About a Coach</h2>
+        <form method="POST" action="/inquire">
+        <label for="coach-name">Coach:</label>
+        <input type="text" id="coach-name" name="coach-name" value="{{ coach_name }}" readonly>
+
+        <label for="user-email">Your Email:</label>
+        <input type="email" id="user-email" name="user-email" placeholder="Enter your email" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" placeholder="Enter your message" required></textarea>
+
+        <button type="submit">Submit Inquiry</button>
+        <a href="{{ url_for('coaches') }}"><button type="button">Cancel</button></a>
+        </form>
+
+</section>
+{% endblock %}
